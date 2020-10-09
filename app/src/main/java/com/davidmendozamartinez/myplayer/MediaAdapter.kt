@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 
 class MediaAdapter(private val items: List<MediaItem>) : RecyclerView.Adapter<MediaAdapter.ViewHolder>() {
 
@@ -28,7 +27,7 @@ class MediaAdapter(private val items: List<MediaItem>) : RecyclerView.Adapter<Me
 
         fun bind(mediaItem: MediaItem) {
             title.text = mediaItem.title
-            Glide.with(thumb).load(mediaItem.url).into(thumb)
+            thumb.loadUrl(mediaItem.url)
 
             itemView.setOnClickListener { toast(mediaItem.title) }
         }
