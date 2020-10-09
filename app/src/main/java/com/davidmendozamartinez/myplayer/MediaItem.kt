@@ -1,3 +1,3 @@
 package com.davidmendozamartinez.myplayer
 
-class MediaItem(val title: String, val url: String)
+data class MediaItem(val title: String, val url: String)
