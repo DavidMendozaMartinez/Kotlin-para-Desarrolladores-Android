@@ -1,6 +1,5 @@
 package com.davidmendozamartinez.myplayer
 
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -11,9 +10,7 @@ import com.bumptech.glide.Glide
 class MediaAdapter(private val items: List<MediaItem>) : RecyclerView.Adapter<MediaAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater
-                .from(parent.context)
-                .inflate(R.layout.view_media_item, parent, false)
+        val view = parent.inflate(R.layout.view_media_item, false)
         return ViewHolder(view)
     }
 
