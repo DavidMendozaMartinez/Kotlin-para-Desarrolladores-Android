@@ -3,7 +3,7 @@ package com.davidmendozamartinez.myplayer
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.view_media_item.view.*
+import com.davidmendozamartinez.myplayer.databinding.ViewMediaItemBinding
 
 class MediaAdapter(private val items: List<MediaItem>) : RecyclerView.Adapter<MediaAdapter.ViewHolder>() {
 
@@ -21,15 +21,17 @@ class MediaAdapter(private val items: List<MediaItem>) : RecyclerView.Adapter<Me
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
+        private val binding = ViewMediaItemBinding.bind(view)
+
         fun bind(mediaItem: MediaItem) {
-            itemView.mediaTitle.text = mediaItem.title
-            itemView.mediaThumb.loadUrl(mediaItem.url)
-            itemView.mediaVideoIndicator.visibility = when (mediaItem.type) {
+            binding.mediaTitle.text = mediaItem.title
+            binding.mediaThumb.loadUrl(mediaItem.url)
+            binding.mediaVideoIndicator.visibility = when (mediaItem.type) {
                 MediaItem.Type.PHOTO -> View.GONE
                 MediaItem.Type.VIDEO -> View.VISIBLE
             }
 
-            itemView.setOnClickListener { toast(mediaItem.title) }
+            binding.root.setOnClickListener { toast(mediaItem.title) }
         }
     }
 }
