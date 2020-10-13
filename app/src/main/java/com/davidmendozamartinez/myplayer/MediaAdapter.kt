@@ -23,15 +23,15 @@ class MediaAdapter(private val items: List<MediaItem>) : RecyclerView.Adapter<Me
 
         private val binding = ViewMediaItemBinding.bind(view)
 
-        fun bind(mediaItem: MediaItem) {
-            binding.mediaTitle.text = mediaItem.title
-            binding.mediaThumb.loadUrl(mediaItem.url)
-            binding.mediaVideoIndicator.visibility = when (mediaItem.type) {
+        fun bind(mediaItem: MediaItem) = with(binding) {
+            mediaTitle.text = mediaItem.title
+            mediaThumb.loadUrl(mediaItem.url)
+            mediaVideoIndicator.visibility = when (mediaItem.type) {
                 MediaItem.Type.PHOTO -> View.GONE
                 MediaItem.Type.VIDEO -> View.VISIBLE
             }
 
-            binding.root.setOnClickListener { toast(mediaItem.title) }
+            root.setOnClickListener { toast(mediaItem.title) }
         }
     }
 }
