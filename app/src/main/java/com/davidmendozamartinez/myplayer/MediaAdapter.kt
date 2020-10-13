@@ -5,7 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.davidmendozamartinez.myplayer.databinding.ViewMediaItemBinding
 
-class MediaAdapter(private val items: List<MediaItem>) : RecyclerView.Adapter<MediaAdapter.ViewHolder>() {
+class MediaAdapter(private val items: List<MediaItem>, private val listener: (MediaItem) -> Unit) :
+        RecyclerView.Adapter<MediaAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = parent.inflate(R.layout.view_media_item, false)
@@ -15,6 +16,7 @@ class MediaAdapter(private val items: List<MediaItem>) : RecyclerView.Adapter<Me
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
         holder.bind(item)
+        holder.itemView.setOnClickListener { listener(item) }
     }
 
     override fun getItemCount(): Int = items.size
@@ -30,8 +32,6 @@ class MediaAdapter(private val items: List<MediaItem>) : RecyclerView.Adapter<Me
                 MediaItem.Type.PHOTO -> View.GONE
                 MediaItem.Type.VIDEO -> View.VISIBLE
             }
-
-            root.setOnClickListener { toast(mediaItem.title) }
         }
     }
 }
