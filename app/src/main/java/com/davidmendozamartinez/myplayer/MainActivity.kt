@@ -5,13 +5,14 @@ import androidx.appcompat.app.AppCompatActivity
 import com.davidmendozamartinez.myplayer.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
+    private val adapter by lazy { MediaAdapter(getItems()) { toast(it.title) } }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.recycler.adapter = MediaAdapter(getItems()) { mediaItem ->
-            toast(mediaItem.title)
-        }
+        binding.recycler.adapter = adapter
     }
 }
