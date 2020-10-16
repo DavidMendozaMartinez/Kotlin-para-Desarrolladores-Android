@@ -5,15 +5,13 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.davidmendozamartinez.myplayer.databinding.ActivityMainBinding
-import kotlinx.coroutines.*
-import kotlin.coroutines.CoroutineContext
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class MainActivity : AppCompatActivity(), CoroutineScope {
-
-    private lateinit var job: Job
-    override val coroutineContext: CoroutineContext
-        get() = Dispatchers.Main + job
+class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private val adapter = MediaAdapter { toast(it.title) }
@@ -23,14 +21,12 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        job = SupervisorJob()
-
         binding.recycler.adapter = adapter
         updateItems()
     }
 
     private fun updateItems(filterId: Int = R.id.filter_all) {
-        launch {
+        lifecycleScope.launch {
             binding.progress.visibility = View.VISIBLE
             adapter.items = withContext(Dispatchers.IO) { getFilteredItems(filterId) }
             binding.progress.visibility = View.GONE
@@ -56,10 +52,5 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         updateItems(item.itemId)
         return true
-    }
-
-    override fun onDestroy() {
-        job.cancel()
-        super.onDestroy()
     }
 }
