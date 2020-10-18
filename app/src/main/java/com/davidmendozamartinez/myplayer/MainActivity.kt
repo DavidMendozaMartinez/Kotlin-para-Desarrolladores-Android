@@ -27,21 +27,19 @@ class MainActivity : AppCompatActivity() {
         updateItems()
     }
 
-    private fun updateItems(filterId: Int = R.id.filter_all) {
+    private fun updateItems(filter: Filter = Filter.None) {
         lifecycleScope.launch {
             binding.progress.visibility = View.VISIBLE
-            adapter.items = withContext(Dispatchers.IO) { getFilteredItems(filterId) }
+            adapter.items = withContext(Dispatchers.IO) { getFilteredItems(filter) }
             binding.progress.visibility = View.GONE
         }
     }
 
-    private fun getFilteredItems(filterId: Int): List<MediaItem> {
+    private fun getFilteredItems(filter: Filter): List<MediaItem> {
         return MediaProvider.getItems().let { media ->
-            when (filterId) {
-                R.id.filter_all -> media
-                R.id.filter_photos -> media.filter { it.type == MediaItem.Type.PHOTO }
-                R.id.filter_videos -> media.filter { it.type == MediaItem.Type.VIDEO }
-                else -> emptyList()
+            when (filter) {
+                Filter.None -> media
+                is Filter.ByType -> media.filter { it.type == filter.type }
             }
         }
     }
@@ -52,7 +50,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        updateItems(item.itemId)
+        val filter = when (item.itemId) {
+            R.id.filter_photos -> Filter.ByType(MediaItem.Type.PHOTO)
+            R.id.filter_videos -> Filter.ByType(MediaItem.Type.VIDEO)
+            else -> Filter.None
+        }
+
+        updateItems(filter)
         return true
     }
 }
