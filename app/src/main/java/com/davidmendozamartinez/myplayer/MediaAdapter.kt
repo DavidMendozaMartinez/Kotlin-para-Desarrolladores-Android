@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.davidmendozamartinez.myplayer.databinding.ViewMediaItemBinding
 import kotlin.properties.Delegates
 
-class MediaAdapter(items: List<MediaItem> = emptyList(), private val listener: (MediaItem) -> Unit) :
+private typealias MediaListener = (MediaItem) -> Unit
+
+class MediaAdapter(items: List<MediaItem> = emptyList(), private val listener: MediaListener) :
         RecyclerView.Adapter<MediaAdapter.ViewHolder>() {
 
     var items by Delegates.observable(items) { _, _, _ -> notifyDataSetChanged() }
