@@ -1,4 +1,4 @@
-package com.davidmendozamartinez.myplayer
+package com.davidmendozamartinez.myplayer.data
 
 sealed class Filter {
     object None : Filter()

@@ -1,9 +1,13 @@
-package com.davidmendozamartinez.myplayer
+package com.davidmendozamartinez.myplayer.ui.main
 
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.davidmendozamartinez.myplayer.R
+import com.davidmendozamartinez.myplayer.data.MediaItem
 import com.davidmendozamartinez.myplayer.databinding.ViewMediaItemBinding
+import com.davidmendozamartinez.myplayer.ui.inflate
+import com.davidmendozamartinez.myplayer.ui.loadUrl
 import kotlin.properties.Delegates
 
 private typealias MediaListener = (MediaItem) -> Unit

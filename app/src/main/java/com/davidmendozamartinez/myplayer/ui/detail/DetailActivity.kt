@@ -1,10 +1,13 @@
-package com.davidmendozamartinez.myplayer
+package com.davidmendozamartinez.myplayer.ui.detail
 
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.davidmendozamartinez.myplayer.data.MediaItem
+import com.davidmendozamartinez.myplayer.data.MediaProvider
 import com.davidmendozamartinez.myplayer.databinding.ActivityDetailBinding
+import com.davidmendozamartinez.myplayer.ui.loadUrl
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

@@ -1,4 +1,4 @@
-package com.davidmendozamartinez.myplayer
+package com.davidmendozamartinez.myplayer.ui
 
 import android.app.Activity
 import android.content.Context

@@ -1,4 +1,4 @@
-package com.davidmendozamartinez.myplayer
+package com.davidmendozamartinez.myplayer.ui.main
 
 import android.os.Bundle
 import android.view.Menu
@@ -6,7 +6,14 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.davidmendozamartinez.myplayer.R
+import com.davidmendozamartinez.myplayer.data.Filter
+import com.davidmendozamartinez.myplayer.data.MediaItem
+import com.davidmendozamartinez.myplayer.data.MediaItem.Type
+import com.davidmendozamartinez.myplayer.data.MediaProvider
 import com.davidmendozamartinez.myplayer.databinding.ActivityMainBinding
+import com.davidmendozamartinez.myplayer.ui.detail.DetailActivity
+import com.davidmendozamartinez.myplayer.ui.startActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -51,8 +58,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val filter = when (item.itemId) {
-            R.id.filter_photos -> Filter.ByType(MediaItem.Type.PHOTO)
-            R.id.filter_videos -> Filter.ByType(MediaItem.Type.VIDEO)
+            R.id.filter_photos -> Filter.ByType(Type.PHOTO)
+            R.id.filter_videos -> Filter.ByType(Type.VIDEO)
             else -> Filter.None
         }
 

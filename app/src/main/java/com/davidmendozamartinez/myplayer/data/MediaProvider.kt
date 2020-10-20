@@ -1,7 +1,7 @@
-package com.davidmendozamartinez.myplayer
+package com.davidmendozamartinez.myplayer.data
 
 import androidx.annotation.WorkerThread
-import com.davidmendozamartinez.myplayer.MediaItem.Type
+import com.davidmendozamartinez.myplayer.data.MediaItem.Type
 
 object MediaProvider {
 
