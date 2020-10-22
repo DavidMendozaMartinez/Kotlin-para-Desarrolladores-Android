@@ -5,13 +5,13 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.get
 import com.davidmendozamartinez.myplayer.R
 import com.davidmendozamartinez.myplayer.data.Filter
 import com.davidmendozamartinez.myplayer.data.MediaItem.Type
 import com.davidmendozamartinez.myplayer.databinding.ActivityMainBinding
 import com.davidmendozamartinez.myplayer.ui.detail.DetailActivity
+import com.davidmendozamartinez.myplayer.ui.getViewModel
+import com.davidmendozamartinez.myplayer.ui.observe
 import com.davidmendozamartinez.myplayer.ui.startActivity
 
 class MainActivity : AppCompatActivity() {
@@ -25,10 +25,10 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel = ViewModelProvider(this).get<MainViewModel>().apply {
-            items.observe(this@MainActivity, { adapter.items = it })
-            progressVisible.observe(this@MainActivity, { binding.progress.isVisible = it })
-            navigateToDetail.observe(this@MainActivity, { navigateToDetail(it) })
+        viewModel = getViewModel {
+            observe(items) { adapter.items = it }
+            observe(progressVisible) { binding.progress.isVisible = it }
+            observe(navigateToDetail) { navigateToDetail(it) }
         }
 
         binding.recycler.adapter = adapter

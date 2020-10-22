@@ -7,19 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.core.os.bundleOf
-import androidx.recyclerview.widget.RecyclerView
+import androidx.lifecycle.*
 import com.bumptech.glide.Glide
-
-fun Context.toast(text: CharSequence, duration: Int = Toast.LENGTH_SHORT) {
-    Toast.makeText(this, text, duration).show()
-}
-
-fun RecyclerView.ViewHolder.toast(text: CharSequence, duration: Int = Toast.LENGTH_SHORT) {
-    itemView.context.toast(text, duration)
-}
 
 fun ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = true): View =
         LayoutInflater.from(context).inflate(layoutRes, this, attachToRoot)
@@ -32,4 +23,11 @@ inline fun <reified T : Activity> Context.startActivity(vararg pairs: Pair<Strin
     Intent(this, T::class.java)
             .apply { putExtras(bundleOf(*pairs)) }
             .also(::startActivity)
+}
+
+inline fun <reified T : ViewModel> ViewModelStoreOwner.getViewModel(body: T.() -> Unit = { }): T =
+        ViewModelProvider(this).get<T>().apply(body)
+
+fun <T> LifecycleOwner.observe(liveData: LiveData<T>, observer: (T) -> Unit) {
+    liveData.observe(this, Observer(observer))
 }
