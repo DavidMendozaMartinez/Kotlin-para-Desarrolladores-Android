@@ -3,10 +3,14 @@ package com.davidmendozamartinez.myplayer.data
 import androidx.annotation.WorkerThread
 import com.davidmendozamartinez.myplayer.data.MediaItem.Type
 
-object MediaProvider {
+interface MediaProvider {
+    fun getItems(): List<MediaItem>
+}
+
+object MediaProviderImpl : MediaProvider {
 
     @WorkerThread
-    fun getItems(): List<MediaItem> {
+    override fun getItems(): List<MediaItem> {
         Thread.sleep(2000)
         return (1..10).map {
             MediaItem(
