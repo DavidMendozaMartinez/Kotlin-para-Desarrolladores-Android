@@ -10,14 +10,14 @@ import com.davidmendozamartinez.myplayer.data.Filter
 import com.davidmendozamartinez.myplayer.data.MediaItem.Type
 import com.davidmendozamartinez.myplayer.databinding.ActivityMainBinding
 import com.davidmendozamartinez.myplayer.ui.detail.DetailActivity
-import com.davidmendozamartinez.myplayer.ui.getViewModel
 import com.davidmendozamartinez.myplayer.ui.observe
 import com.davidmendozamartinez.myplayer.ui.startActivity
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var viewModel: MainViewModel
+    private val viewModel: MainViewModel by viewModel()
     private val adapter = MediaAdapter { viewModel.onItemClicked(it) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel = getViewModel {
+        with(viewModel) {
             observe(items) { adapter.items = it }
             observe(progressVisible) { binding.progress.isVisible = it }
             observe(navigateToDetail) { event ->

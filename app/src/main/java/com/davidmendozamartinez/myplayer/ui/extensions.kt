@@ -9,7 +9,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.annotation.LayoutRes
 import androidx.core.os.bundleOf
-import androidx.lifecycle.*
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 
 fun ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = true): View =
@@ -24,9 +26,6 @@ inline fun <reified T : Activity> Context.startActivity(vararg pairs: Pair<Strin
             .apply { putExtras(bundleOf(*pairs)) }
             .also(::startActivity)
 }
-
-inline fun <reified T : ViewModel> ViewModelStoreOwner.getViewModel(body: T.() -> Unit = { }): T =
-        ViewModelProvider(this).get<T>().apply(body)
 
 fun <T> LifecycleOwner.observe(liveData: LiveData<T>, observer: (T) -> Unit) {
     liveData.observe(this, Observer(observer))
