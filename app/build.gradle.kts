@@ -39,24 +39,24 @@ android {
 dependencies {
     implementation(fileTree("libs") { include(listOf("*.jar")) })
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.kotlinxCoroutines}")
 
-    implementation("androidx.appcompat:appcompat:1.2.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.0.2")
-    implementation("androidx.recyclerview:recyclerview:1.1.0")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0")
-    implementation("androidx.core:core-ktx:1.3.2")
+    implementation("androidx.appcompat:appcompat:${Versions.appCompat}")
+    implementation("androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}")
+    implementation("androidx.recyclerview:recyclerview:${Versions.recyclerView}")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}")
+    implementation("androidx.core:core-ktx:${Versions.coreKTX}")
 
-    implementation("com.github.bumptech.glide:glide:4.11.0")
-    kapt("com.github.bumptech.glide:compiler:4.11.0")
+    implementation("com.github.bumptech.glide:glide:${Versions.glide}")
+    kapt("com.github.bumptech.glide:compiler:${Versions.glide}")
 
-    implementation("org.koin:koin-androidx-viewmodel:2.2.0-rc-3")
+    implementation("org.koin:koin-androidx-viewmodel:${Versions.koin}")
 
-    testImplementation("junit:junit:4.12")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.9")
-    testImplementation("androidx.arch.core:core-testing:2.1.0")
-    testImplementation("org.mockito:mockito-inline:2.28.2")
-    testImplementation("com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0")
+    testImplementation("junit:junit:${Versions.junit}")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.kotlinxCoroutines}")
+    testImplementation("androidx.arch.core:core-testing:${Versions.archCore}")
+    testImplementation("org.mockito:mockito-inline:${Versions.mockitoInline}")
+    testImplementation("com.nhaarman.mockitokotlin2:mockito-kotlin:${Versions.mockitoKotlin}")
 }
 
 repositories {

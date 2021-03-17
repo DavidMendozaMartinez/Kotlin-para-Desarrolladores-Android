@@ -1,3 +1,16 @@
-object Versions  {
+object Versions {
+    const val gradlePlugin = "4.1.2"
     const val kotlin = "1.4.31"
+    const val kotlinxCoroutines = "1.4.3"
+    const val appCompat = "1.2.0"
+    const val constraintLayout = "2.0.4"
+    const val recyclerView = "1.1.0"
+    const val lifecycle = "2.3.0"
+    const val coreKTX = "1.3.2"
+    const val glide = "4.12.0"
+    const val koin = "2.2.2"
+    const val junit = "4.13.2"
+    const val archCore = "2.1.0"
+    const val mockitoInline = "3.8.0"
+    const val mockitoKotlin = "2.2.0"
 }
